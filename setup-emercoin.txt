@@ -1,0 +1,6 @@
+sudo su
+apt -y install software-properties-common apt-utils dnsutils apt-transport-https curl pkg-php-tools git-all traceroute mlocate libcurl4-openssl-dev libjansson-dev apache2-ssl-dev bruteforce-salted-openssl tcl-tls scrypt r-cran-digest r-cran-openssl openvpn cl-plus-ssl 
+apt-key adv --keyserver keyserver.ubuntu.com --recv B58C58F4
+add-apt-repository 'deb http://download.emercoin.com/debian jessie emercoin'
+apt update && apt -y install emercoin
+systemctl enable emercoind
