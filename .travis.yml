@@ -77,11 +77,11 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
     sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils libudev-dev libusb-1.0-0-dev;
     fi
-  - if [[ ! -d $GOPATH/src/github.com/skycoin/skycoin ]]; then
-    mkdir -p $GOPATH/src/github.com/skycoin;
-    ln -s $TRAVIS_BUILD_DIR $GOPATH/src/github.com/skycoin/skycoin;
+  - if [[ ! -d $GOPATH/src/github.com/ness-network/privateness ]]; then
+    mkdir -p $GOPATH/src/github.com/privateness;
+    ln -s $TRAVIS_BUILD_DIR $GOPATH/src/github.com/ness-network/privateness;
     fi
-  - cd $GOPATH/src/github.com/skycoin/skycoin
+  - cd $GOPATH/src/github.com/ness-network/privateness
   - if [[ "$TRAVIS_OS_NAME" != "windows" ]]; then nvm install 10.16.3 && nvm use 10.16.3; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./ci-scripts/install-nodejs-win.sh; fi
 
@@ -107,11 +107,11 @@ deploy:
   region: $AWS_REGION
   edge: true # opt in to dpl v2
   on:
-    repo: skycoin/skycoin
+    repo: ness-network/privateness
     tags: true
 
 notifications:
   email:
-    - travis@skycoin.com
+    - travis@privateness.network
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
