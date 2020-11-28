@@ -13,9 +13,9 @@ import (
 
 	"github.com/urfave/cli"
 
-	"github.com/skycoin/skycoin/src/fiber"
-	"github.com/skycoin/skycoin/src/util/logging"
-	"github.com/skycoin/skycoin/src/util/useragent"
+	"github.com/privateness/privateness/src/fiber"
+	"github.com/privateness/privateness/src/util/logging"
+	"github.com/privateness/privateness/src/util/useragent"
 )
 
 const (
@@ -58,7 +58,7 @@ func createCoinCommand() cli.Command {
 			cli.StringFlag{
 				Name:  "coin",
 				Usage: "name of the coin to create",
-				Value: "skycoin",
+				Value: "privateness",
 			},
 			cli.StringFlag{
 				Name:  "template-dir, td",
