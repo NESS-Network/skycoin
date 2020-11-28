@@ -9,7 +9,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	"github.com/skycoin/skycoin/src/cipher/bip44"
+	"github.com/ness-network/privateness/src/cipher/bip44"
 )
 
 // Config records fiber coin parameters
