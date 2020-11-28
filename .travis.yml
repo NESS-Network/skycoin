@@ -78,7 +78,7 @@ install:
     sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils libudev-dev libusb-1.0-0-dev;
     fi
   - if [[ ! -d $GOPATH/src/github.com/ness-network/privateness ]]; then
-    mkdir -p $GOPATH/src/github.com/privateness;
+    mkdir -p $GOPATH/src/github.com/ness-network;
     ln -s $TRAVIS_BUILD_DIR $GOPATH/src/github.com/ness-network/privateness;
     fi
   - cd $GOPATH/src/github.com/ness-network/privateness
