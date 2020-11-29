@@ -1,5 +1,5 @@
 /*
-skycoin daemon
+PrivateNess daemon
 */
 package main
 

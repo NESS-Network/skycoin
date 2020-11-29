@@ -21,11 +21,11 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/skycoin/skycoin/cmd/monitor-peers/connection"
-	"github.com/skycoin/skycoin/src/cipher"
-	"github.com/skycoin/skycoin/src/daemon"
-	"github.com/skycoin/skycoin/src/daemon/pex"
-	"github.com/skycoin/skycoin/src/util/logging"
+	"github.com/ness-network/privateness/cmd/monitor-peers/connection"
+	"github.com/ness-network/privateness/src/cipher"
+	"github.com/ness-network/privateness/src/daemon"
+	"github.com/ness-network/privateness/src/daemon/pex"
+	"github.com/ness-network/privateness/src/util/logging"
 )
 
 // PeerState is a current state of the peer
@@ -100,7 +100,7 @@ func (r Report) Append(addr string, state PeerState, introduction *daemon.Introd
 }
 
 const (
-	blockchainPubKey                 = "0328c576d3f420e7682058a981173a4b374c7cc5ff55bf394d3cf57059bbe6456a"
+	blockchainPubKey                 = "0278d26405ec24c8bf8998cf767b65c29f0dfcdff3542cdb1de44ed0539e9c9d9b"
 	defaultConnectTimeout            = "1s"
 	defaultReadTimeout               = "1s"
 	defaultPeersFile                 = "peers.txt"
