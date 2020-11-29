@@ -13,9 +13,9 @@ import (
 
 	"github.com/urfave/cli"
 
-	"github.com/NESS-Network/privateness/src/fiber"
-	"github.com/NESS-Network/privateness/src/util/logging"
-	"github.com/NESS-Network/privateness/src/util/useragent"
+	"github.com/ness-network/privateness/src/fiber"
+	"github.com/ness-network/privateness/src/util/logging"
+	"github.com/ness-network/privateness/src/util/useragent"
 )
 
 const (

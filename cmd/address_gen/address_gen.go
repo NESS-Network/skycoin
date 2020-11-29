@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/skycoin/skycoin/src/cipher"
-	"github.com/skycoin/skycoin/src/cipher/bip39"
-	"github.com/skycoin/skycoin/src/util/logging"
-	"github.com/skycoin/skycoin/src/wallet"
-	"github.com/skycoin/skycoin/src/wallet/deterministic"
+	"github.com/ness-network/privateness/src/cipher"
+	"github.com/ness-network/privateness/src/cipher/bip39"
+	"github.com/ness-network/privateness/src/util/logging"
+	"github.com/ness-network/privateness/src/wallet"
+	"github.com/ness-network/privateness/src/wallet/deterministic"
 )
 
 // Note: Address_gen generates public keys and addresses

@@ -12,10 +12,8 @@ default_connections = [
 	"192.243.100.192:6000",
 	"167.114.97.165:6000",
 	"198.245.62.172:6000",
-#//	"45.56.109.228:6000",
-#//	"173.230.130.174:6000",
-#//	"172.104.99.241:6000",
-#//	"172.104.57.147:6000",
+	"198.100.144.39:6000",
+	"94.23.56.111:6000",
 ]
 peer_list_url = "https://fuckyc.com/blockchain/peers.txt"
 # port = 6000
@@ -35,7 +33,7 @@ peer_list_url = "https://fuckyc.com/blockchain/peers.txt"
   coin_hours_ticker = "HNESS"
  qr_uri_prefix = "PrivateNess"
   explorer_url = "https://explorer.privateness.network"
-# bip44_coin = 8000
+  bip44_coin = 8000
 
 [params]
   max_coin_supply = 2e8
