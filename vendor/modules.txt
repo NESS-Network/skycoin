@@ -66,6 +66,20 @@ github.com/mgutz/ansi
 # github.com/mitchellh/mapstructure v1.1.2
 ## explicit
 github.com/mitchellh/mapstructure
+# github.com/ness-network/privateness v0.26.0
+## explicit
+github.com/ness-network/privateness/cmd/monitor-peers/connection
+github.com/ness-network/privateness/src/cipher
+github.com/ness-network/privateness/src/cipher/bip32
+github.com/ness-network/privateness/src/cipher/bip39
+github.com/ness-network/privateness/src/cipher/encoder
+github.com/ness-network/privateness/src/cipher/testsuite
+github.com/ness-network/privateness/src/daemon
+github.com/ness-network/privateness/src/daemon/gnet
+github.com/ness-network/privateness/src/daemon/pex
+github.com/ness-network/privateness/src/util/file
+github.com/ness-network/privateness/src/util/iputil
+github.com/ness-network/privateness/src/util/logging
 # github.com/pelletier/go-toml v1.2.0
 github.com/pelletier/go-toml
 # github.com/pmezard/go-difflib v1.0.0

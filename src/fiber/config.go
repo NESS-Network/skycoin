@@ -9,7 +9,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	"github.com/ness-network/privateness/src/cipher/bip44"
+	"github.com/skycoin/skycoin/src/cipher/bip44"
 )
 
 // Config records fiber coin parameters
@@ -145,7 +145,7 @@ func NewConfig(configName, appDir string) (Config, error) {
 
 func setDefaults() {
 	// node defaults
-	viper.SetDefault("node.genesis_coin_volume", 200e12)
+	viper.SetDefault("node.genesis_coin_volume", 100e12)
 	viper.SetDefault("node.port", 6000)
 	viper.SetDefault("node.web_interface_port", 6420)
 	viper.SetDefault("node.unconfirmed_burn_factor", 10)
