@@ -103,7 +103,7 @@ func main() {
 	}
 
 	// create a new fiber coin instance
-	coin := privateness.NewCoin(privateness.Config{
+	coin := skycoin.NewCoin(skycoin.Config{
 		Node: nodeConfig,
 		Build: readable.BuildInfo{
 			Version: Version,

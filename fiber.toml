@@ -37,7 +37,7 @@ peer_list_url = "https://fuckyc.com/blockchain/peers.txt"
 
 [params]
   max_coin_supply = 2e8
-  initial_unlocked_count = 50
+  initial_unlocked_count = 10
   unlock_address_rate = 5
   unlock_time_interval = 60 * 60 * 24 * 365
 # user_max_decimals = 3

@@ -87,7 +87,7 @@ var (
 		CreateBlockMaxDropletPrecision: 3,
 		MaxBlockTransactionsSize:       32768,
 
-		DisplayName:           "privateness",
+		DisplayName:           "PrivateNess",
 		Ticker:                "NESS",
 		CoinHoursName:         "Coin Hours",
 		CoinHoursNameSingular: "Coin Hour",
@@ -111,7 +111,7 @@ func main() {
 	}
 
 	// create a new fiber coin instance
-	coin := privateness.NewCoin(privateness.Config{
+	coin := skycoin.NewCoin(skycoin.Config{
 		Node: nodeConfig,
 		Build: readable.BuildInfo{
 			Version: Version,

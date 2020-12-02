@@ -171,8 +171,8 @@ func setDefaults() {
 
 	// params defaults
 	viper.SetDefault("params.max_coin_supply", 2e8)
-	viper.SetDefault("params.initial_unlocked_count", 50)
-	viper.SetDefault("params.unlock_address_rate", 10)
+	viper.SetDefault("params.initial_unlocked_count", 10)
+	viper.SetDefault("params.unlock_address_rate", 5)
 	viper.SetDefault("params.unlock_time_interval", 60*60*24*365)
 	viper.SetDefault("params.user_max_decimals", 3)
 	viper.SetDefault("params.user_burn_factor", 2)
