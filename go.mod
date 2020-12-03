@@ -1,4 +1,4 @@
-module github.com/skycoin/skycoin
+module github.com/ness-network/privateness
 
 go 1.14
 
@@ -19,7 +19,6 @@ require (
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b
 	github.com/mitchellh/mapstructure v1.1.2 // indirect
-	github.com/ness-network/privateness v0.26.0
 	github.com/prometheus/client_golang v0.8.0
 	github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910 // indirect
 	github.com/prometheus/common v0.0.0-20181020173914-7e9e6cabbd39 // indirect
@@ -29,6 +28,7 @@ require (
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/sirupsen/logrus v1.1.1
 	github.com/skycoin/encodertest v0.0.0-20190217072920-14c2e31898b9
+	github.com/skycoin/skycoin v0.27.1
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/pflag v1.0.3
 	github.com/spf13/viper v1.2.1
