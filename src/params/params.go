@@ -119,7 +119,7 @@ var (
 	// UserVerifyTxn transaction verification parameters for user-created transactions
 	UserVerifyTxn = VerifyTxn{
 		// BurnFactor can be overriden with `USER_BURN_FACTOR` env var
-		BurnFactor: 1,
+		BurnFactor: 2,
 		// MaxTransactionSize can be overriden with `USER_MAX_TXN_SIZE` env var
 		MaxTransactionSize: 32768, // in bytes
 		// MaxDropletPrecision can be overriden with `USER_MAX_DECIMALS` env var

@@ -41,7 +41,7 @@ initial_unlocked_count = 10
 # unlock_time_interval = 60 * 60 * 24 * 365
 # user_max_decimals = 3
 # user_max_transaction_size = 32 * 1024
-user_burn_factor = 1
+user_burn_factor = 2
 distribution_addresses = [
     "R6aHqKWSQfvpdo2fGSrq4F1RYXkBWR9HHJ",
     "2EYM4WFHe4Dgz6kjAdUkM6Etep7ruz2ia6h",
