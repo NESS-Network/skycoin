@@ -1,5 +1,5 @@
 /*
-privateness daemon
+skycoin daemon
 */
 package main
 
@@ -40,7 +40,7 @@ var (
 	logger = logging.MustGetLogger("main")
 
 	// CoinName name of coin
-	CoinName = "privateness"
+	CoinName = "skycoin"
 
 	// GenesisSignatureStr hex string of genesis signature
 	GenesisSignatureStr = "0b0661652a064c48f5ec565b596cf3be1a438e9e1bd1de551f16f76172ae0a02628a5cecdd366aaba070786c2040c32113da871ca3a80d26902eb7566a319d6f00"
@@ -58,14 +58,14 @@ var (
 
 	// DefaultConnections the default trust node addresses
 	DefaultConnections = []string{
-	"192.243.100.192:6000",
-	"167.114.97.165:6000",
-	"198.245.62.172:6000",
-	"198.100.144.39:6000",
-	"94.23.56.111:6000",
+		"192.243.100.192:6660",
+		"167.114.97.165:6660",
+		"198.245.62.172:6660",
+		"198.100.144.39:6660",
+		"94.23.56.111:6660",
 	}
 
-	nodeConfig = privateness.NewNodeConfig(ConfigMode, fiber.NodeConfig{
+	nodeConfig = skycoin.NewNodeConfig(ConfigMode, fiber.NodeConfig{
 		CoinName:            CoinName,
 		GenesisSignatureStr: GenesisSignatureStr,
 		GenesisAddressStr:   GenesisAddressStr,
@@ -75,9 +75,9 @@ var (
 		BlockchainSeckeyStr: BlockchainSeckeyStr,
 		DefaultConnections:  DefaultConnections,
 		PeerListURL:         "https://fuckyc.com/blockchain/peers.txt",
-		Port:                6000,
-		WebInterfacePort:    6420,
-		DataDirectory:       "$HOME/.privateness",
+		Port:                6660,
+		WebInterfacePort:    6620,
+		DataDirectory:       "$HOME/.skycoin",
 
 		UnconfirmedBurnFactor:          10,
 		UnconfirmedMaxTransactionSize:  32768,
@@ -94,7 +94,7 @@ var (
 		CoinHoursTicker:       "HNESS",
 		QrURIPrefix:           "privateness",
 		ExplorerURL:           "https://explorer.privateness.network",
-		VersionURL:            "https://version.privateness.network/privateness/version.txt",
+		VersionURL:            "https://version.skycoin.com/skycoin/version.txt",
 		Bip44Coin:             8000,
 	})
 
