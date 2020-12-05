@@ -10,10 +10,10 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/skycoin/skycoin/src/cipher/encoder"
-	"github.com/skycoin/skycoin/src/daemon"
-	"github.com/skycoin/skycoin/src/daemon/gnet"
-	"github.com/skycoin/skycoin/src/util/iputil"
+	"github.com/ness-network/privateness/src/cipher/encoder"
+	"github.com/ness-network/privateness/src/daemon"
+	"github.com/ness-network/privateness/src/daemon/gnet"
+	"github.com/ness-network/privateness/src/util/iputil"
 )
 
 const (

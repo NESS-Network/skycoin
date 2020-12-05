@@ -23,7 +23,7 @@
 .PHONY: fuzz-base58 fuzz-encoder
 .PHONY: check-lang check-lang-es check-lang-zh
 
-COIN ?= skycoin
+COIN ?= privateness
 
 # Static files directory
 GUI_STATIC_DIR = src/gui/static
@@ -61,7 +61,7 @@ run-integration-test-live-cover-disable-csrf: ## Run the skycoin node configured
 run-integration-test-live-cover-disable-networking: ## Run the skycoin node configured for live integration tests with networking disabled and with coverage
 	./ci-scripts/run-live-integration-test-node-cover.sh -disable-networking
 
-test: ## Run tests for Skycoin
+test: ## Run tests for PrivateNess
 	@mkdir -p coverage/
 	COIN=$(COIN) go test -coverpkg="github.com/$(COIN)/$(COIN)/..." -coverprofile=coverage/go-test-cmd.coverage.out -timeout=5m ./cmd/...
 	COIN=$(COIN) go test -coverpkg="github.com/$(COIN)/$(COIN)/..." -coverprofile=coverage/go-test-src.coverage.out -timeout=5m ./src/...

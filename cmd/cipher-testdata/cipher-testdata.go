@@ -15,11 +15,11 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/skycoin/skycoin/src/cipher"
-	"github.com/skycoin/skycoin/src/cipher/bip32"
-	"github.com/skycoin/skycoin/src/cipher/bip39"
-	"github.com/skycoin/skycoin/src/cipher/testsuite"
-	"github.com/skycoin/skycoin/src/util/file"
+	"github.com/ness-network/privateness/src/cipher"
+	"github.com/ness-network/privateness/src/cipher/bip32"
+	"github.com/ness-network/privateness/src/cipher/bip39"
+	"github.com/ness-network/privateness/src/cipher/testsuite"
+	"github.com/ness-network/privateness/src/util/file"
 )
 
 const (
