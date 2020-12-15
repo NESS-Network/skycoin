@@ -31,7 +31,7 @@ let dev = process.argv.find(arg => arg === 'dev') ? true : false;
 app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1, EXCLUDE api.coinpaprika.com, EXCLUDE swaplab.cc, EXCLUDE version.skycoin.com, EXCLUDE downloads.skycoin.com');
 app.commandLine.appendSwitch('ssl-version-fallback-min', 'tls1.2');
 app.commandLine.appendSwitch('--no-proxy-server');
-app.setAsDefaultProtocolClient('skycoin');
+app.setAsDefaultProtocolClient('privateness');
 
 
 
@@ -39,11 +39,11 @@ app.setAsDefaultProtocolClient('skycoin');
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
-var skycoin = null;
+var privateness = null;
 
 function startSkycoin() {
   if (!dev) {
-    console.log('Starting skycoin from electron');
+    console.log('Starting privateness from electron');
 
     if (skycoin) {
       console.log('Skycoin already running');
@@ -60,15 +60,15 @@ function startSkycoin() {
     var exe = (() => {
       switch (process.platform) {
         case 'darwin':
-          return path.join(appPath, '../../Resources/app/skycoin');
+          return path.join(appPath, '../../Resources/app/privateness');
         case 'win32':
           // Use only the relative path on windows due to short path length
           // limits
-          return './resources/app/skycoin.exe';
+          return './resources/app/privateness.exe';
         case 'linux':
-          return path.join(path.dirname(appPath), './resources/app/skycoin');
+          return path.join(path.dirname(appPath), './resources/app/privateness');
         default:
-          return './resources/app/skycoin';
+          return './resources/app/privateness';
       }
     })()
 
@@ -88,16 +88,16 @@ function startSkycoin() {
       // broken (automatically generated certs do not work):
       // '-web-interface-https=true',
     ]
-    skycoin = childProcess.spawn(exe, args);
+    privateness = childProcess.spawn(exe, args);
 
     createWindow();
 
-    skycoin.on('error', (e) => {
+    privateness.on('error', (e) => {
       showError();
       app.quit();
     });
 
-    skycoin.stdout.on('data', (data) => {
+    privateness.stdout.on('data', (data) => {
       console.log(data.toString());
       if (currentURL) {
         return
@@ -111,7 +111,7 @@ function startSkycoin() {
 		  var id = setInterval(function() {
 			// wait till the splash page loading is finished
 			if (splashLoaded) {
-			  app.emit('skycoin-ready', { url: currentURL });
+			  app.emit('privateness-ready', { url: currentURL });
 			  clearInterval(id);
 			}
 		  }, 500);
@@ -119,20 +119,20 @@ function startSkycoin() {
       });
     });
 
-    skycoin.stderr.on('data', (data) => {
+    privateness.stderr.on('data', (data) => {
       console.log(data.toString());
     });
 
-    skycoin.on('close', (code) => {
-      // log.info('Skycoin closed');
-      console.log('Skycoin closed');
+    privateness.on('close', (code) => {
+      // log.info('privateness closed');
+      console.log('privateness closed');
       showError();
       reset();
     });
 
-    skycoin.on('exit', (code) => {
-      // log.info('Skycoin exited');
-      console.log('Skycoin exited');
+    privateness.on('exit', (code) => {
+      // log.info('privateness exited');
+      console.log('privateness exited');
       showError();
       reset();
     });
@@ -140,7 +140,7 @@ function startSkycoin() {
   } else {
     // If in dev mode, simply open the dev server URL.
     currentURL = 'http://localhost:4200/';
-    app.emit('skycoin-ready', { url: currentURL });
+    app.emit('privateness-ready', { url: currentURL });
 
     axios
       .get('http://localhost:4200/api/v1/wallets/folderName')
@@ -173,7 +173,7 @@ function createWindow(url) {
     width: 1200,
     height: 900,
     backgroundColor: '#000000',
-    title: 'Skycoin',
+    title: 'Privateness',
     icon: iconPath,
     nodeIntegration: false,
     webPreferences: {
@@ -204,7 +204,7 @@ function createWindow(url) {
   const ses = win.webContents.session
 
   ses.clearCache().then(response => {
-    console.log('Cleared the caching of the skycoin wallet.');
+    console.log('Cleared the caching of the privateness wallet.');
   });
 
   if (url) {
@@ -240,7 +240,7 @@ function createWindow(url) {
 
   // create application's main menu
   var template = [{
-    label: 'Skycoin',
+    label: 'Privateness',
     submenu: [
       { label: 'Quit', accelerator: 'Command+Q', click: function() { app.quit(); } }
     ]
@@ -264,7 +264,7 @@ function createWindow(url) {
           if (walletsFolder) {
             shell.showItemInFolder(walletsFolder)
           } else {
-            shell.showItemInFolder(path.join(app.getPath("home"), '.skycoin', 'wallets'));
+            shell.showItemInFolder(path.join(app.getPath("home"), '.privateness', 'wallets'));
           }
         },
       },
@@ -274,7 +274,7 @@ function createWindow(url) {
           if (walletsFolder) {
             shell.showItemInFolder(walletsFolder.replace('wallets', 'logs'))
           } else {
-            shell.showItemInFolder(path.join(app.getPath("home"), '.skycoin', 'logs'));
+            shell.showItemInFolder(path.join(app.getPath("home"), '.privateness', 'logs'));
           }
         },
       },
@@ -323,9 +323,9 @@ let walletsFolder = null;
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', startSkycoin);
+app.on('ready', startprivateness);
 
-app.on('skycoin-ready', (e) => {
+app.on('privateness-ready', (e) => {
   if (win) {
     win.loadURL(e.url);
   } else {
@@ -358,8 +358,8 @@ app.on('activate', () => {
 });
 
 app.on('will-quit', () => {
-  if (skycoin) {
-    skycoin.kill('SIGINT');
+  if (privateness) {
+    privateness.kill('SIGINT');
   }
 });
 
