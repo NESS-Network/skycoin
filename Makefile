@@ -22,7 +22,7 @@
 .PHONY: generate update-golden-files
 .PHONY: fuzz-base58 fuzz-encoder
 
-COIN ?= skycoin
+COIN ?= privateness
 
 # Static files directory
 GUI_STATIC_DIR = src/gui/static
@@ -33,43 +33,43 @@ ELECTRON_DIR = electron
 # Platform specific checks
 OSNAME = $(TRAVIS_OS_NAME)
 
-run-client:  ## Run skycoin with desktop client configuration. To add arguments, do 'make ARGS="--foo" run'.
+run-client:  ## Run  with desktop client configuration. To add arguments, do 'make ARGS="--foo" run'.
 	./run-client.sh ${ARGS}
 
-run-daemon:  ## Run skycoin with server daemon configuration. To add arguments, do 'make ARGS="--foo" run'.
+run-daemon:  ## Run privateness with server daemon configuration. To add arguments, do 'make ARGS="--foo" run'.
 	./run-daemon.sh ${ARGS}
 
-run-help: ## Show skycoin node help
+run-help: ## Show privateness node help
 	@go run cmd/$(COIN)/$(COIN).go --help
 
-run-integration-test-live: ## Run the skycoin node configured for live integration tests
+run-integration-test-live: ## Run the privateness node configured for live integration tests
 	./ci-scripts/run-live-integration-test-node.sh
 
-run-integration-test-live-disable-csrf: ## Run the skycoin node configured for live integration tests with CSRF disabled
+run-integration-test-live-disable-csrf: ## Run the privateness node configured for live integration tests with CSRF disabled
 	./ci-scripts/run-live-integration-test-node.sh -disable-csrf
 
-run-integration-test-live-disable-networking: ## Run the skycoin node configured for live integration tests with networking disabled
+run-integration-test-live-disable-networking: ## Run the privateness node configured for live integration tests with networking disabled
 	./ci-scripts/run-live-integration-test-node.sh -disable-networking
 
-run-integration-test-live-cover: ## Run the skycoin node configured for live integration tests with coverage
+run-integration-test-live-cover: ## Run the privateness node configured for live integration tests with coverage
 	./ci-scripts/run-live-integration-test-node-cover.sh
 
-run-integration-test-live-cover-disable-csrf: ## Run the skycoin node configured for live integration tests with CSRF disabled and with coverage
+run-integration-test-live-cover-disable-csrf: ## Run the privateness node configured for live integration tests with CSRF disabled and with coverage
 	./ci-scripts/run-live-integration-test-node-cover.sh -disable-csrf
 
-run-integration-test-live-cover-disable-networking: ## Run the skycoin node configured for live integration tests with networking disabled and with coverage
+run-integration-test-live-cover-disable-networking: ## Run the privateness node configured for live integration tests with networking disabled and with coverage
 	./ci-scripts/run-live-integration-test-node-cover.sh -disable-networking
 
-test: ## Run tests for Skycoin
+test: ## Run tests for privateness
 	@mkdir -p coverage/
 	COIN=$(COIN) go test -coverpkg="github.com/$(COIN)/$(COIN)/..." -coverprofile=coverage/go-test-cmd.coverage.out -timeout=5m ./cmd/...
 	COIN=$(COIN) go test -coverpkg="github.com/$(COIN)/$(COIN)/..." -coverprofile=coverage/go-test-src.coverage.out -timeout=5m ./src/...
 
-test-386: ## Run tests for Skycoin with GOARCH=386
+test-386: ## Run tests for privateness with GOARCH=386
 	GOARCH=386 COIN=$(COIN) go test ./cmd/... -timeout=5m
 	GOARCH=386 COIN=$(COIN) go test ./src/... -timeout=5m
 
-test-amd64: ## Run tests for Skycoin with GOARCH=amd64
+test-amd64: ## Run tests for privateness with GOARCH=amd64
 	GOARCH=amd64 COIN=$(COIN) go test ./cmd/... -timeout=5m
 	GOARCH=amd64 COIN=$(COIN) go test ./src/... -timeout=5m
 
