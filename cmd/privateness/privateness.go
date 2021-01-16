@@ -37,11 +37,11 @@ var (
 	CoinName = "privateness"
 
 	// GenesisSignatureStr hex string of genesis signature
-	GenesisSignatureStr = "20245614df0bc55f761d81f125274654dd084d2ca0f933038fe16ba8c6e53859623d172269392e020acab208194e21ae591d3b357e1fdee44b7130136d732eac01"
+	GenesisSignatureStr = ""
 	// GenesisAddressStr genesis address string
-	GenesisAddressStr = "2eQpkfb6QYYWrMujCZobMGHRus1WZ9pNM2P"
+	GenesisAddressStr = "24GJTLPMoz61sV4J4qg1n14x5qqDwXqyJJy"
 	// BlockchainPubkeyStr pubic key string
-	BlockchainPubkeyStr = "022d894c92ac54c10e18a4831d3630336f8c14dcda231327be73df285450ed6d24"
+	BlockchainPubkeyStr = "02933015bd2fa1e0a885c05fb08eb7c647bf8c3188ed5120b51d0d09ccaf525036"
 	// BlockchainSeckeyStr empty private key string
 	BlockchainSeckeyStr = ""
 
@@ -68,7 +68,7 @@ var (
 		BlockchainPubkeyStr: BlockchainPubkeyStr,
 		BlockchainSeckeyStr: BlockchainSeckeyStr,
 		DefaultConnections:  DefaultConnections,
-		PeerListURL:         "http://cantdoevil.com/blockchain/peers.txt",
+		PeerListURL:         "http://nodes.privateness.network/blockchain/peers.txt",
 		Port:                6660,
 		WebInterfacePort:    6420,
 		DataDirectory:       "$HOME/.privateness",
