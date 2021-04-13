@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Runs Privateness in desktop client configuration
-
+export COIN=privateness
+export DATA_DIR=/root/.privateness
+export RPC_ADDR=http://127.0.0.1:6420
 set -x
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -19,10 +21,8 @@ go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS cmd/privateness/privateness.go \
     -max-default-peer-outgoing-connections=7 \
     -launch-browser=true \
     -enable-all-api-sets=true \
-    -enable-gui=false \
+    -enable-gui=true \
     -log-level=debug \
-    -disable-csrf \
-    -disable-csp \
     $@
 
 popd >/dev/null

@@ -13,7 +13,7 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 GOLDFLAGS="${GOLDFLAGS} -X main.Commit=${COMMIT} -X main.Branch=${BRANCH}"
 
 GORUNFLAGS=${GORUNFLAGS:-}
-export USER_BURN_FACTOR=2
+export USER_BURN_FACTOR=10
 go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS cmd/privateness/privateness.go \
     -gui-dir="${DIR}/src/gui/static/" \
     -max-default-peer-outgoing-connections=7 \
