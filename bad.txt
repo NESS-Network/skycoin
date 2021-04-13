@@ -1,0 +1,116 @@
+./run-client.sh 
+Ness binary dir: /root/go/src/github.com/ness-network/privateness
+abs path: /root/go/src/github.com/ness-network/privateness/src/gui/static
+runtime.Caller= /root/go/src/github.com/ness-network/privateness/vendor/github.com/skycoin/skycoin/src/skycoin/config.go 
+Filepath Directory= /root/go/src/github.com/ness-network/privateness/src/gui/static 
+Filepath Absolute Directory= /root/go/src/github.com/ness-network/privateness/src/gui/static 
+Working Directory= /tmp/go-build097849485/b001/exe 
+Runtime Filename= /root/go/src/github.com/ness-network/privateness/vendor/github.com/skycoin/skycoin/src/skycoin/config.go 
+Runtime Directory= /root/go/src/github.com/ness-network/privateness/vendor/github.com/skycoin/skycoin/src/skycoin 
+ResolveResourceDirectory: static resource dir= /root/go/src/github.com/ness-network/privateness/src/gui/static 
+[2021-04-11T16:51:15Z] INFO [main]: App version: 0.27.1
+[2021-04-11T16:51:15Z] INFO [main]: OS: linux
+[2021-04-11T16:51:15Z] INFO [main]: Arch: amd64
+[2021-04-11T16:51:15Z] INFO [main]: Opening database /root/.privateness/data.db
+[2021-04-11T16:51:15Z] INFO [main]: DB version: 0.27.1
+[2021-04-11T16:51:15Z] INFO [main]: DB verify checkpoint version: 0.25.0
+[2021-04-11T16:51:15Z] INFO [main]: Coinhour burn factor for user transactions is 2
+[2021-04-11T16:51:15Z] INFO [main]: Max transaction size for user transactions is 32768
+[2021-04-11T16:51:15Z] INFO [main]: Max decimals for user transactions is 3
+[2021-04-11T16:51:15Z] INFO [main]: wallet.NewService
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x000.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x000.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x000.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x001.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x001.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x001.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x002.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x002.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x002.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x003.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x003.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x003.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x004.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x004.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x004.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x005.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x005.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x005.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x006.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x006.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x006.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x007.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x007.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x007.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x008.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x008.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x008.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x009.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x009.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x009.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x010.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x010.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x010.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x011.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x011.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x011.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x012.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x012.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x012.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x013.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x013.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x013.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x014.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x014.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x014.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x015.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x015.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x015.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x016.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x016.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x016.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x017.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x017.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x017.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x018.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x018.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x018.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x019.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x019.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x019.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x020.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x020.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x020.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x021.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x021.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x021.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x022.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x022.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x022.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x023.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x023.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x023.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x024.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x024.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x024.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x025.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: LoadReadableCollectionWallet filename="/root/.privateness/wallets/0x025.wlt"
+[2021-04-11T16:51:15Z] INFO [wallet]: loadWallets: loaded wallet filename="/root/.privateness/wallets/0x025.wlt"
+[2021-04-11T16:51:15Z] DEBUG [wallet]: wallet.NewService complete bip44Coin=8000 walletDir="/root/.privateness/wallets"
+[2021-04-11T16:51:15Z] INFO [main]: visor.New
+[2021-04-11T16:51:15Z] INFO [visor]: Creating new visor
+[2021-04-11T16:51:15Z] INFO [visor]: Coinhour burn factor for unconfirmed transactions is 10
+[2021-04-11T16:51:15Z] INFO [visor]: Max transaction size for unconfirmed transactions is 32768
+[2021-04-11T16:51:15Z] INFO [visor]: Max decimals for unconfirmed transactions is 3
+[2021-04-11T16:51:15Z] INFO [visor]: Coinhour burn factor for transactions when creating blocks is 10
+[2021-04-11T16:51:15Z] INFO [visor]: Max transaction size for transactions when creating blocks is 32768
+[2021-04-11T16:51:15Z] INFO [visor]: Max decimals for transactions when creating blocks is 3
+[2021-04-11T16:51:15Z] INFO [visor]: Max block size is 32768
+[2021-04-11T16:51:15Z] INFO [blockdb]: Unspents.MaybeBuildIndexes
+[2021-04-11T16:51:15Z] INFO [visor]: Visor initHistory
+[2021-04-11T16:51:15Z] INFO [visor]: Unconfirmed transaction pool size: 0
+[2021-04-11T16:51:15Z] INFO [main]: daemon.New
+[2021-04-11T16:51:15Z] INFO [main]: kvstorage.NewManager
+[2021-04-11T16:51:15Z] INFO [kvstorage]: Creating new KVStorage manager
+[2021-04-11T16:51:15Z] INFO [main]: api.NewGateway
+[2021-04-11T16:51:15Z] WARN [api]: HTTPS not in use!
