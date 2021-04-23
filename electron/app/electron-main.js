@@ -240,7 +240,7 @@ function createWindow(url) {
 
     // create application's main menu
     var template = [{
-        label: 'Skycoin',
+        label: 'Privateness',
         submenu: [
             { label: 'Quit', accelerator: 'Command+Q', click: function() { app.quit(); } }
         ]

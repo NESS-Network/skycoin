@@ -7,7 +7,7 @@ import { ISubscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class PriceService {
-  readonly PRICE_API_ID = 'sky-skycoin';
+  readonly PRICE_API_ID = 'ness-privateness';
 
   price: Subject<number> = new BehaviorSubject<number>(null);
 
