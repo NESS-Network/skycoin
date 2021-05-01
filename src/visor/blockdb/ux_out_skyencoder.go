@@ -3,8 +3,8 @@
 package blockdb
 
 import (
-	"github.com/ness-network/privateness/src/cipher/encoder"
-	"github.com/ness-network/privateness/src/coin"
+	"github.com/skycoin/skycoin/src/cipher/encoder"
+	"github.com/skycoin/skycoin/src/coin"
 )
 
 // encodeSizeUxOut computes the size of an encoded object of type UxOut

@@ -3,4 +3,3 @@
 set -e -o pipefail
 
 npm install
-

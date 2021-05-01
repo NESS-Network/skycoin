@@ -6,9 +6,9 @@ import (
 	"errors"
 	"math"
 
-	"github.com/ness-network/privateness/src/cipher"
-	"github.com/ness-network/privateness/src/cipher/encoder"
-	"github.com/ness-network/privateness/src/coin"
+	"github.com/skycoin/skycoin/src/cipher"
+	"github.com/skycoin/skycoin/src/cipher/encoder"
+	"github.com/skycoin/skycoin/src/coin"
 )
 
 // encodeSizeSignedBlock computes the size of an encoded object of type SignedBlock

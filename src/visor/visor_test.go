@@ -13,6 +13,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/skycoin/skycoin/src/wallet"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
@@ -1255,7 +1256,7 @@ func TestGetTransactions(t *testing.T) {
 			},
 		},
 		{
-			"confirmedTxFilter=1 confirmed=false txns=0 unconfirmedTxns=0",
+			"confirmedTxFilter=1 addrsFilter=1 confirmed=false txns=0 unconfirmedTxns=0",
 			map[cipher.Address]txnsAndUncfmTxns{
 				addrs[0]: txnsAndUncfmTxns{
 					Txns:      nil,
@@ -1265,6 +1266,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(false),
 			},
 			expectTxnResult{
@@ -1284,6 +1286,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(false),
 			},
 			expectTxnResult{
@@ -1303,6 +1306,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(false),
 			},
 			expectTxnResult{
@@ -1322,6 +1326,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(false),
 			},
 			expectTxnResult{
@@ -1341,6 +1346,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(false),
 			},
 			expectTxnResult{
@@ -1360,6 +1366,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(true),
 			},
 			expectTxnResult{
@@ -1379,6 +1386,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(true),
 			},
 			expectTxnResult{
@@ -1398,6 +1406,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(true),
 			},
 			expectTxnResult{
@@ -1417,6 +1426,7 @@ func TestGetTransactions(t *testing.T) {
 			blocks[:],
 			headSeq,
 			[]TxFilter{
+				NewAddrsFilter(addrs[:1]),
 				NewConfirmedTxFilter(true),
 			},
 			expectTxnResult{
@@ -1852,16 +1862,50 @@ func TestGetTransactions(t *testing.T) {
 
 			his := newHistoryerMock2()
 			uncfmTxnPool := NewUnconfirmedTransactionPoolerMock2()
-			for addr, txns := range tc.addrTxns {
-				his.On("GetTransactionsForAddress", matchDBTx, addr).Return(txns.Txns, nil)
-				his.txns = append(his.txns, txns.Txns...)
+			forEachFunc := mock.MatchedBy(func(f func(hash cipher.SHA256, txn UnconfirmedTransaction) error) bool {
+				for i, txn := range uncfmTxns {
+					if err := f(txn.Transaction.Hash(), uncfmTxns[i]); err != nil {
+						return false
+					}
+				}
+				return true
+			})
 
+			uncfmTxnPool.On("ForEach", matchDBTx, forEachFunc).Return(nil)
+			for i, txn := range uncfmTxns {
+				uncfmTxnPool.On("Get", matchDBTx, txn.Transaction.Hash()).Return(&uncfmTxns[i], nil)
+			}
+
+			for addr, txns := range tc.addrTxns {
+				for i, txn := range txns.Txns {
+					his.On("GetTransaction", matchDBTx, txn.Hash()).Return(&txns.Txns[i], nil)
+				}
+
+				his.txns = append(his.txns, txns.Txns...)
 				uncfmTxnPool.On("GetUnspentsOfAddr", matchDBTx, addr).Return(makeUncfmUxs(txns.UncfmTxns), nil)
 				for i, uncfmTxn := range txns.UncfmTxns {
 					uncfmTxnPool.On("Get", matchDBTx, uncfmTxn.Transaction.Hash()).Return(&txns.UncfmTxns[i], nil)
 				}
 				uncfmTxnPool.txns = append(uncfmTxnPool.txns, txns.UncfmTxns...)
 			}
+
+			var hisHashes []cipher.SHA256
+			var hisAddrs []cipher.Address
+			for _, flt := range tc.filters {
+				switch f := flt.(type) {
+				case AddrsFilter:
+					hisAddrs = f.Addrs
+					for _, a := range f.Addrs {
+						txns, ok := tc.addrTxns[a]
+						require.True(t, ok)
+						for _, txn := range txns.Txns {
+							hisHashes = append(hisHashes, txn.Hash())
+						}
+					}
+				}
+			}
+
+			his.On("GetTransactionHashesForAddresses", matchDBTx, hisAddrs).Return(hisHashes, nil)
 
 			bc := &MockBlockchainer{}
 			for i, b := range tc.blocks {
@@ -1873,14 +1917,21 @@ func TestGetTransactions(t *testing.T) {
 			db, shutdown := prepareDB(t)
 			defer shutdown()
 
-			v := &Visor{
-				db:          db,
+			txnModel := transactionModel{
 				history:     his,
 				unconfirmed: uncfmTxnPool,
 				blockchain:  bc,
 			}
 
-			retTxns, err := v.GetTransactions(tc.filters)
+			v := &Visor{
+				db:          db,
+				history:     his,
+				unconfirmed: uncfmTxnPool,
+				blockchain:  bc,
+				txns:        &txnModel,
+			}
+
+			retTxns, _, err := v.GetTransactions(tc.filters, AscOrder, nil)
 			require.Equal(t, tc.expect.err, err)
 			if err != nil {
 				return
@@ -2730,5 +2781,148 @@ func TestFbyHashes(t *testing.T) {
 	for _, tt := range tests {
 		outs := FbyHashes(tt.hashes)(tt.outputs)
 		require.Equal(t, outs, tt.want)
+	}
+}
+
+// MockHistoryerAddressSeen embeds MockHistoryer, and rewrite AddressSeen method
+type MockHistoryerAddressSeen struct {
+	MockHistoryer
+	addrsMap map[cipher.Address]struct{}
+}
+
+func (m *MockHistoryerAddressSeen) AddressSeen(_ *dbutil.Tx, addr cipher.Address) (bool, error) {
+	if _, ok := m.addrsMap[addr]; ok {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+// MockUnconfirmedTransactionPoolerForEach embeds MockUnconfirmedTransactionPooler, and rewrite ForEach method.
+type MockUnconfirmedTransactionPoolerForEach struct {
+	MockUnconfirmedTransactionPooler
+	txns []UnconfirmedTransaction
+}
+
+func (m *MockUnconfirmedTransactionPoolerForEach) ForEach(_ *dbutil.Tx, f func(hash cipher.SHA256, txn UnconfirmedTransaction) error) error {
+	for _, txn := range m.txns {
+		if err := f(txn.Transaction.Hash(), txn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func TestTransactionsFinder(t *testing.T) {
+	addrs := make([]cipher.Addresser, 5)
+	unconfirmedTxns := make([]UnconfirmedTransaction, 5)
+
+	for i := 0; i < 5; i++ {
+		a := testutil.MakeAddress()
+		addrs[i] = a
+
+		outputs := []coin.TransactionOutput{
+			{
+				Address: a,
+			},
+		}
+		unconfirmedTxns[i].Transaction = coin.Transaction{
+			Out: outputs,
+		}
+	}
+
+	var tt = []struct {
+		name            string
+		addrsInHistroy  []cipher.Address
+		unconfirmedTxns []UnconfirmedTransaction
+
+		addrsToFind []cipher.Addresser
+		expected    []bool
+	}{
+		{
+			name:        "find no address",
+			addrsToFind: addrs,
+			expected:    []bool{false, false, false, false, false},
+		},
+		{
+			name:           "last address",
+			addrsInHistroy: wallet.SkycoinAddresses(addrs[4:]),
+			addrsToFind:    addrs,
+
+			expected: []bool{false, false, false, false, true},
+		},
+		{
+			name:           "second last address",
+			addrsInHistroy: wallet.SkycoinAddresses(addrs[3:4]),
+			addrsToFind:    addrs,
+
+			expected: []bool{false, false, false, true, false},
+		},
+		{
+			name:           "first address",
+			addrsInHistroy: wallet.SkycoinAddresses(addrs[0:1]),
+			addrsToFind:    addrs,
+
+			expected: []bool{true, false, false, false, false},
+		},
+		{
+			name:           "second address",
+			addrsInHistroy: wallet.SkycoinAddresses(append([]cipher.Addresser{}, addrs[1])),
+			addrsToFind:    addrs,
+
+			expected: []bool{false, true, false, false, false},
+		},
+		{
+			name:            "last addr in unconfirmed txns",
+			addrsToFind:     addrs,
+			unconfirmedTxns: unconfirmedTxns[4:],
+
+			expected: []bool{false, false, false, false, true},
+		},
+		{
+			name:            "second last addr in unconfirmed txns",
+			addrsToFind:     addrs,
+			unconfirmedTxns: unconfirmedTxns[3:4],
+
+			expected: []bool{false, false, false, true, false},
+		},
+		{
+			name:            "first addr in unconfirmed txns",
+			addrsToFind:     addrs,
+			unconfirmedTxns: unconfirmedTxns[0:1],
+
+			expected: []bool{true, false, false, false, false},
+		},
+		{
+			name:            "second addr in unconfirmed txns",
+			addrsToFind:     addrs,
+			unconfirmedTxns: unconfirmedTxns[1:2],
+
+			expected: []bool{false, true, false, false, false},
+		},
+	}
+
+	for _, tc := range tt {
+		t.Run(tc.name, func(t *testing.T) {
+			db, shutdown := prepareDB(t)
+			defer shutdown()
+
+			addrsInHistory := map[cipher.Address]struct{}{}
+			for _, addr := range tc.addrsInHistroy {
+				addrsInHistory[addr] = struct{}{}
+			}
+
+			tf := TransactionsFinder{
+				db:          db,
+				history:     &MockHistoryerAddressSeen{addrsMap: addrsInHistory},
+				unconfirmed: &MockUnconfirmedTransactionPoolerForEach{txns: tc.unconfirmedTxns},
+			}
+
+			addrsAct, err := tf.AddressesActivity(tc.addrsToFind)
+			require.NoError(t, err)
+
+			require.Equal(t, tc.expected, addrsAct)
+		})
 	}
 }

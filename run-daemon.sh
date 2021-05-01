@@ -1,25 +1,23 @@
 #!/usr/bin/env bash
 
-# Runs Privateness in server daemon configuration
+# Runs skycoin in daemon mode configuration
 
 set -x
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-echo "Ness binary dir:" "$DIR"
+echo "skycoin binary dir:" "$DIR"
 pushd "$DIR" >/dev/null
 
 COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-GOLDFLAGS="${GOLDFLAGS} -X main.Commit=${COMMIT} -X main.Branch=${BRANCH}"
+GOLDFLAGS="-X main.Commit=${COMMIT} -X main.Branch=${BRANCH}"
 
 GORUNFLAGS=${GORUNFLAGS:-}
-go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS cmd/privateness/privateness.go \
-    -gui-dir="${DIR}/src/gui/static/" \
-    -max-default-peer-outgoing-connections=7 \
-    -launch-browser=false \
-    -enable-all-api-sets=true \
+
+go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS ./cmd/skycoin/... \
     -enable-gui=false \
-    -log-level=info \
+    -launch-browser=false \
+    -log-level=debug \
     $@
 
 popd >/dev/null

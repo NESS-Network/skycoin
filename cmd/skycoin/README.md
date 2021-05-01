@@ -119,7 +119,7 @@ Usage:
   -db-read-only
     	open bolt db read-only
   -disable-api-sets string
-    	disable API set. Options are READ, STATUS, WALLET, TXN, PROMETHEUS, NET_CTRL, INSECURE_WALLET_SEED, STORAGE. Multiple values should be separated by comma
+    	disable API set. Options are READ, STATUS, WALLET, TXN, NET_CTRL, INSECURE_WALLET_SEED, STORAGE. Multiple values should be separated by comma
   -disable-csp
     	disable content-security-policy in http response
   -disable-csrf
@@ -141,7 +141,7 @@ Usage:
   -enable-all-api-sets
     	enable all API sets, except for deprecated or insecure sets. This option is applied before -disable-api-sets.
   -enable-api-sets string
-    	enable API set. Options are READ, STATUS, WALLET, TXN, PROMETHEUS, NET_CTRL, INSECURE_WALLET_SEED, STORAGE. Multiple values should be separated by comma (default "READ,TXN")
+    	enable API set. Options are READ, STATUS, WALLET, TXN, NET_CTRL, INSECURE_WALLET_SEED, STORAGE. Multiple values should be separated by comma (default "READ,TXN")
   -enable-gui
     	Enable GUI
   -genesis-address string
@@ -184,6 +184,8 @@ Usage:
     	Maximum length of outgoing wire messages (default 262144)
   -max-outgoing-connections int
     	Maximum number of outgoing connections allowed (default 8)
+  -max-incoming-connections int
+        Maximum number  of incoming connections allowed (default 120)
   -max-txn-size-create-block uint
     	maximum size of a transaction applied when creating blocks (default 32768)
   -max-txn-size-unconfirmed uint
@@ -392,7 +394,7 @@ Open the database file in read-only mode.
 ### disable-api-sets
 
 Disable one or more API sets. Possible API sets are:
-`READ`, `STATUS`, `WALLET`, `TXN`, `PROMETHEUS`, `NET_CTRL`, `INSECURE_WALLET_SEED`, `STORAGE`.
+`READ`, `STATUS`, `WALLET`, `TXN`, `NET_CTRL`, `INSECURE_WALLET_SEED`, `STORAGE`.
 Multiple values should be separated by comma. Combine with `enable-all-api-sets` to blacklist specific API sets.
 
 Read more about API sets here: https://github.com/skycoin/skycoin/blob/develop/src/api/README.md#api-sets
@@ -447,7 +449,7 @@ Read more about API sets here: https://github.com/skycoin/skycoin/blob/develop/s
 ### enable-api-sets
 
 Enable one or more API sets. Possible API sets are:
-`READ`, `STATUS`, `WALLET`, `TXN`, `PROMETHEUS`, `NET_CTRL`, `INSECURE_WALLET_SEED`, `STORAGE`.
+`READ`, `STATUS`, `WALLET`, `TXN`, `NET_CTRL`, `INSECURE_WALLET_SEED`, `STORAGE`.
 Multiple values should be separated by comma.
 
 Read more about API sets here: https://github.com/skycoin/skycoin/blob/develop/src/api/README.md#api-sets
@@ -535,7 +537,7 @@ More than 1 connections are not typically made, to avoid saturating the default 
 
 ### max-incoming-connections
 
-**This is not an option.** This value is equal to `max-connections` minus `max-outgoing-connections`.
+The maximum number of incoming connections allowed.
 
 ### max-in-msg-len
 

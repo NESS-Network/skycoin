@@ -63,29 +63,6 @@ func (_m *MockGatewayer) AddressCount() (uint64, error) {
 	return r0, r1
 }
 
-// AddressesActivity provides a mock function with given fields: addrs
-func (_m *MockGatewayer) AddressesActivity(addrs []cipher.Address) ([]bool, error) {
-	ret := _m.Called(addrs)
-
-	var r0 []bool
-	if rf, ok := ret.Get(0).(func([]cipher.Address) []bool); ok {
-		r0 = rf(addrs)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]bool)
-		}
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func([]cipher.Address) error); ok {
-		r1 = rf(addrs)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
 // CreateTransaction provides a mock function with given fields: p, wp
 func (_m *MockGatewayer) CreateTransaction(p transaction.Params, wp visor.CreateTransactionParams) (*coin.Transaction, []visor.TransactionInput, error) {
 	ret := _m.Called(p, wp)
@@ -118,13 +95,13 @@ func (_m *MockGatewayer) CreateTransaction(p transaction.Params, wp visor.Create
 	return r0, r1, r2
 }
 
-// CreateWallet provides a mock function with given fields: wltName, options, bg
-func (_m *MockGatewayer) CreateWallet(wltName string, options wallet.Options, bg wallet.TransactionsFinder) (wallet.Wallet, error) {
-	ret := _m.Called(wltName, options, bg)
+// CreateWallet provides a mock function with given fields: wltName, options
+func (_m *MockGatewayer) CreateWallet(wltName string, options wallet.Options) (wallet.Wallet, error) {
+	ret := _m.Called(wltName, options)
 
 	var r0 wallet.Wallet
-	if rf, ok := ret.Get(0).(func(string, wallet.Options, wallet.TransactionsFinder) wallet.Wallet); ok {
-		r0 = rf(wltName, options, bg)
+	if rf, ok := ret.Get(0).(func(string, wallet.Options) wallet.Wallet); ok {
+		r0 = rf(wltName, options)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(wallet.Wallet)
@@ -132,8 +109,8 @@ func (_m *MockGatewayer) CreateWallet(wltName string, options wallet.Options, bg
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(string, wallet.Options, wallet.TransactionsFinder) error); ok {
-		r1 = rf(wltName, options, bg)
+	if rf, ok := ret.Get(1).(func(string, wallet.Options) error); ok {
+		r1 = rf(wltName, options)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -732,7 +709,7 @@ func (_m *MockGatewayer) GetSignedBlockBySeqVerbose(seq uint64) (*coin.SignedBlo
 }
 
 // GetSpentOutputsForAddresses provides a mock function with given fields: addr
-func (_m *MockGatewayer) GetSpentOutputsForAddresses(addr []cipher.Address) ([][]historydb.UxOut, error) {
+func (_m *MockGatewayer) GetSpentOutputsForAddresses(addr []cipher.Address) ([][]historydb.UxOut, uint64, error) {
 	ret := _m.Called(addr)
 
 	var r0 [][]historydb.UxOut
@@ -744,14 +721,21 @@ func (_m *MockGatewayer) GetSpentOutputsForAddresses(addr []cipher.Address) ([][
 		}
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func([]cipher.Address) error); ok {
+	var r1 uint64
+	if rf, ok := ret.Get(1).(func([]cipher.Address) uint64); ok {
 		r1 = rf(addr)
 	} else {
-		r1 = ret.Error(1)
+		r1 = ret.Get(1).(uint64)
 	}
 
-	return r0, r1
+	var r2 error
+	if rf, ok := ret.Get(2).(func([]cipher.Address) error); ok {
+		r2 = rf(addr)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // GetStorageValue provides a mock function with given fields: storageType, key
@@ -830,36 +814,43 @@ func (_m *MockGatewayer) GetTransactionWithInputs(txid cipher.SHA256) (*visor.Tr
 	return r0, r1, r2
 }
 
-// GetTransactions provides a mock function with given fields: flts
-func (_m *MockGatewayer) GetTransactions(flts []visor.TxFilter) ([]visor.Transaction, error) {
-	ret := _m.Called(flts)
+// GetTransactions provides a mock function with given fields: flts, order, page
+func (_m *MockGatewayer) GetTransactions(flts []visor.TxFilter, order visor.SortOrder, page *visor.PageIndex) ([]visor.Transaction, uint64, error) {
+	ret := _m.Called(flts, order, page)
 
 	var r0 []visor.Transaction
-	if rf, ok := ret.Get(0).(func([]visor.TxFilter) []visor.Transaction); ok {
-		r0 = rf(flts)
+	if rf, ok := ret.Get(0).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) []visor.Transaction); ok {
+		r0 = rf(flts, order, page)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).([]visor.Transaction)
 		}
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func([]visor.TxFilter) error); ok {
-		r1 = rf(flts)
+	var r1 uint64
+	if rf, ok := ret.Get(1).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) uint64); ok {
+		r1 = rf(flts, order, page)
 	} else {
-		r1 = ret.Error(1)
+		r1 = ret.Get(1).(uint64)
 	}
 
-	return r0, r1
+	var r2 error
+	if rf, ok := ret.Get(2).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) error); ok {
+		r2 = rf(flts, order, page)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
-// GetTransactionsWithInputs provides a mock function with given fields: flts
-func (_m *MockGatewayer) GetTransactionsWithInputs(flts []visor.TxFilter) ([]visor.Transaction, [][]visor.TransactionInput, error) {
-	ret := _m.Called(flts)
+// GetTransactionsWithInputs provides a mock function with given fields: flts, order, page
+func (_m *MockGatewayer) GetTransactionsWithInputs(flts []visor.TxFilter, order visor.SortOrder, page *visor.PageIndex) ([]visor.Transaction, [][]visor.TransactionInput, uint64, error) {
+	ret := _m.Called(flts, order, page)
 
 	var r0 []visor.Transaction
-	if rf, ok := ret.Get(0).(func([]visor.TxFilter) []visor.Transaction); ok {
-		r0 = rf(flts)
+	if rf, ok := ret.Get(0).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) []visor.Transaction); ok {
+		r0 = rf(flts, order, page)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).([]visor.Transaction)
@@ -867,22 +858,29 @@ func (_m *MockGatewayer) GetTransactionsWithInputs(flts []visor.TxFilter) ([]vis
 	}
 
 	var r1 [][]visor.TransactionInput
-	if rf, ok := ret.Get(1).(func([]visor.TxFilter) [][]visor.TransactionInput); ok {
-		r1 = rf(flts)
+	if rf, ok := ret.Get(1).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) [][]visor.TransactionInput); ok {
+		r1 = rf(flts, order, page)
 	} else {
 		if ret.Get(1) != nil {
 			r1 = ret.Get(1).([][]visor.TransactionInput)
 		}
 	}
 
-	var r2 error
-	if rf, ok := ret.Get(2).(func([]visor.TxFilter) error); ok {
-		r2 = rf(flts)
+	var r2 uint64
+	if rf, ok := ret.Get(2).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) uint64); ok {
+		r2 = rf(flts, order, page)
 	} else {
-		r2 = ret.Error(2)
+		r2 = ret.Get(2).(uint64)
 	}
 
-	return r0, r1, r2
+	var r3 error
+	if rf, ok := ret.Get(3).(func([]visor.TxFilter, visor.SortOrder, *visor.PageIndex) error); ok {
+		r3 = rf(flts, order, page)
+	} else {
+		r3 = ret.Error(3)
+	}
+
+	return r0, r1, r2, r3
 }
 
 // GetTrustConnections provides a mock function with given fields:
@@ -925,7 +923,7 @@ func (_m *MockGatewayer) GetUnspentOutputsSummary(filters []visor.OutputsFilter)
 }
 
 // GetUxOutByID provides a mock function with given fields: id
-func (_m *MockGatewayer) GetUxOutByID(id cipher.SHA256) (*historydb.UxOut, error) {
+func (_m *MockGatewayer) GetUxOutByID(id cipher.SHA256) (*historydb.UxOut, uint64, error) {
 	ret := _m.Called(id)
 
 	var r0 *historydb.UxOut
@@ -937,41 +935,16 @@ func (_m *MockGatewayer) GetUxOutByID(id cipher.SHA256) (*historydb.UxOut, error
 		}
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(cipher.SHA256) error); ok {
+	var r1 uint64
+	if rf, ok := ret.Get(1).(func(cipher.SHA256) uint64); ok {
 		r1 = rf(id)
 	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// GetVerboseTransactionsForAddress provides a mock function with given fields: a
-func (_m *MockGatewayer) GetVerboseTransactionsForAddress(a cipher.Address) ([]visor.Transaction, [][]visor.TransactionInput, error) {
-	ret := _m.Called(a)
-
-	var r0 []visor.Transaction
-	if rf, ok := ret.Get(0).(func(cipher.Address) []visor.Transaction); ok {
-		r0 = rf(a)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]visor.Transaction)
-		}
-	}
-
-	var r1 [][]visor.TransactionInput
-	if rf, ok := ret.Get(1).(func(cipher.Address) [][]visor.TransactionInput); ok {
-		r1 = rf(a)
-	} else {
-		if ret.Get(1) != nil {
-			r1 = ret.Get(1).([][]visor.TransactionInput)
-		}
+		r1 = ret.Get(1).(uint64)
 	}
 
 	var r2 error
-	if rf, ok := ret.Get(2).(func(cipher.Address) error); ok {
-		r2 = rf(a)
+	if rf, ok := ret.Get(2).(func(cipher.SHA256) error); ok {
+		r2 = rf(id)
 	} else {
 		r2 = ret.Error(2)
 	}
@@ -1194,13 +1167,20 @@ func (_m *MockGatewayer) InjectTransaction(txn coin.Transaction) error {
 	return r0
 }
 
-// NewAddresses provides a mock function with given fields: wltID, password, n
-func (_m *MockGatewayer) NewAddresses(wltID string, password []byte, n uint64) ([]cipher.Address, error) {
-	ret := _m.Called(wltID, password, n)
+// NewAddresses provides a mock function with given fields: wltID, password, n, options
+func (_m *MockGatewayer) NewAddresses(wltID string, password []byte, n uint64, options ...wallet.Option) ([]cipher.Address, error) {
+	_va := make([]interface{}, len(options))
+	for _i := range options {
+		_va[_i] = options[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, wltID, password, n)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	var r0 []cipher.Address
-	if rf, ok := ret.Get(0).(func(string, []byte, uint64) []cipher.Address); ok {
-		r0 = rf(wltID, password, n)
+	if rf, ok := ret.Get(0).(func(string, []byte, uint64, ...wallet.Option) []cipher.Address); ok {
+		r0 = rf(wltID, password, n, options...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).([]cipher.Address)
@@ -1208,8 +1188,8 @@ func (_m *MockGatewayer) NewAddresses(wltID string, password []byte, n uint64) (
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(string, []byte, uint64) error); ok {
-		r1 = rf(wltID, password, n)
+	if rf, ok := ret.Get(1).(func(string, []byte, uint64, ...wallet.Option) error); ok {
+		r1 = rf(wltID, password, n, options...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -1277,6 +1257,52 @@ func (_m *MockGatewayer) ResendUnconfirmedTxns() ([]cipher.SHA256, error) {
 	return r0, r1
 }
 
+// ScanAddresses provides a mock function with given fields: wltID, password, n, tf
+func (_m *MockGatewayer) ScanAddresses(wltID string, password []byte, n uint64, tf wallet.TransactionsFinder) ([]cipher.Address, error) {
+	ret := _m.Called(wltID, password, n, tf)
+
+	var r0 []cipher.Address
+	if rf, ok := ret.Get(0).(func(string, []byte, uint64, wallet.TransactionsFinder) []cipher.Address); ok {
+		r0 = rf(wltID, password, n, tf)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]cipher.Address)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(string, []byte, uint64, wallet.TransactionsFinder) error); ok {
+		r1 = rf(wltID, password, n, tf)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ScanWalletAddresses provides a mock function with given fields: wltID, password, num
+func (_m *MockGatewayer) ScanWalletAddresses(wltID string, password []byte, num uint64) ([]cipher.Address, error) {
+	ret := _m.Called(wltID, password, num)
+
+	var r0 []cipher.Address
+	if rf, ok := ret.Get(0).(func(string, []byte, uint64) []cipher.Address); ok {
+		r0 = rf(wltID, password, num)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]cipher.Address)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(string, []byte, uint64) error); ok {
+		r1 = rf(wltID, password, num)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // StartedAt provides a mock function with given fields:
 func (_m *MockGatewayer) StartedAt() time.Time {
 	ret := _m.Called()
@@ -1286,6 +1312,22 @@ func (_m *MockGatewayer) StartedAt() time.Time {
 		r0 = rf()
 	} else {
 		r0 = ret.Get(0).(time.Time)
+	}
+
+	return r0
+}
+
+// TransactionsFinder provides a mock function with given fields:
+func (_m *MockGatewayer) TransactionsFinder() wallet.TransactionsFinder {
+	ret := _m.Called()
+
+	var r0 wallet.TransactionsFinder
+	if rf, ok := ret.Get(0).(func() wallet.TransactionsFinder); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(wallet.TransactionsFinder)
+		}
 	}
 
 	return r0

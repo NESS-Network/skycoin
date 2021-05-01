@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e -o pipefail
+set -xe -o pipefail
 
 # installs the node modules for the skycoin electron app
 # and for the electron build process
