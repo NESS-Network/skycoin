@@ -13,7 +13,6 @@ import (
 	_ "net/http/pprof"
 	"os"
 
-	"github.com/skycoin/skycoin/src/fiber"
 	"github.com/skycoin/skycoin/src/readable"
 	"github.com/skycoin/skycoin/src/skycoin"
 	"github.com/skycoin/skycoin/src/util/logging"
@@ -21,7 +20,7 @@ import (
 
 var (
 	// Version of the node. Can be set by -ldflags
-	Version = "0.27.1"
+	Version = "0.26.0"
 	// Commit ID. Can be set by -ldflags
 	Commit = ""
 	// Branch name. Can be set by -ldflags
@@ -37,58 +36,46 @@ var (
 	CoinName = "skycoin"
 
 	// GenesisSignatureStr hex string of genesis signature
-	GenesisSignatureStr = ""
+	GenesisSignatureStr = "eb10468d10054d15f2b6f8946cd46797779aa20a7617ceb4be884189f219bc9a164e56a5b9f7bec392a804ff3740210348d73db77a37adb542a8e08d429ac92700"
 	// GenesisAddressStr genesis address string
-	GenesisAddressStr = "2gCKbJzkVYZA3EvsYosexq9jdvP3iQ8iFBv"
+	GenesisAddressStr = "2jBbGxZRGoQG1mqhPBnXnLTxK6oxsTf8os6"
 	// BlockchainPubkeyStr pubic key string
-	BlockchainPubkeyStr = "03b427d19f1059fb8cfe9ab11f65c55a3b27799f411f49c397e0f9a1ccd7fc3659"
+	BlockchainPubkeyStr = "0328c576d3f420e7682058a981173a4b374c7cc5ff55bf394d3cf57059bbe6456a"
 	// BlockchainSeckeyStr empty private key string
 	BlockchainSeckeyStr = ""
 
 	// GenesisTimestamp genesis block create unix time
 	GenesisTimestamp uint64 = 1426562704
 	// GenesisCoinVolume represents the coin capacity
-	GenesisCoinVolume uint64 = 200000000000000
+	GenesisCoinVolume uint64 = 100000000000000
 
 	// DefaultConnections the default trust node addresses
 	DefaultConnections = []string{
-		"192.243.100.192:6660",
-		"167.114.97.165:6660",
-		"198.245.62.172:6660",
-		"198.100.144.39:6660",
-		"94.23.56.111:6660",
+		"118.178.135.93:6000",
+		"47.88.33.156:6000",
+		"104.237.142.206:6000",
+		"176.58.126.224:6000",
+		"172.104.85.6:6000",
+		"139.162.7.132:6000",
+		"139.162.39.186:6000",
+		"45.33.111.142:6000",
+		"109.237.27.172:6000",
+		"172.104.41.14:6000",
 	}
 
-	nodeConfig = skycoin.NewNodeConfig(ConfigMode, fiber.NodeConfig{
-		CoinName:            CoinName,
-		GenesisSignatureStr: GenesisSignatureStr,
-		GenesisAddressStr:   GenesisAddressStr,
-		GenesisCoinVolume:   GenesisCoinVolume,
-		GenesisTimestamp:    GenesisTimestamp,
-		BlockchainPubkeyStr: BlockchainPubkeyStr,
-		BlockchainSeckeyStr: BlockchainSeckeyStr,
-		DefaultConnections:  DefaultConnections,
-		PeerListURL:         "http://cantdoevil.com/blockchain/peers.txt",
-		Port:                6660,
-		WebInterfacePort:    6420,
-		DataDirectory:       "$HOME/.skycoin",
-
-		UnconfirmedBurnFactor:          10,
-		UnconfirmedMaxTransactionSize:  32768,
-		UnconfirmedMaxDropletPrecision: 3,
-		CreateBlockBurnFactor:          10,
-		CreateBlockMaxTransactionSize:  32768,
-		CreateBlockMaxDropletPrecision: 3,
-		MaxBlockTransactionsSize:       32768,
-
-		DisplayName:           "PrivateNess",
-		Ticker:                "NESS",
-		CoinHoursName:         "Coin Hours",
-		CoinHoursNameSingular: "Coin Hour",
-		CoinHoursTicker:       "HNESS",
-		ExplorerURL:           "https://explorer.privateness.network",
-		VersionURL:            "https://version.skycoin.com/skycoin/version.txt",
-		Bip44Coin:             8000,
+	nodeConfig = skycoin.NewNodeConfig(ConfigMode, skycoin.NodeParameters{
+		CoinName:                       CoinName,
+		GenesisSignatureStr:            GenesisSignatureStr,
+		GenesisAddressStr:              GenesisAddressStr,
+		GenesisCoinVolume:              GenesisCoinVolume,
+		GenesisTimestamp:               GenesisTimestamp,
+		BlockchainPubkeyStr:            BlockchainPubkeyStr,
+		BlockchainSeckeyStr:            BlockchainSeckeyStr,
+		DefaultConnections:             DefaultConnections,
+		PeerListURL:                    "https://downloads.skycoin.net/blockchain/peers.txt",
+		Port:                           6000,
+		WebInterfacePort:               6420,
+		DataDirectory:                  "$HOME/.skycoin",
 	})
 
 	parseFlags = true

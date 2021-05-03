@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"log"
 	"reflect"
-	"strconv"
-	"strings"
 
 	mathrand "math/rand"
+
+	"github.com/skycoin/skycoin/src/cipher/encoder"
 )
 
 // PopulateRandomOptions are configuration options for the PopulateRandom method
@@ -117,10 +117,10 @@ func populate(v reflect.Value, rand *mathrand.Rand, options PopulateRandomOption
 			}
 
 			tag := ff.Tag.Get("enc")
-			omitempty := tagOmitempty(tag)
+			omitempty := encoder.TagOmitempty(tag)
 
 			if omitempty && i != nFields-1 {
-				log.Panic("omitempty can only be used on the last field of a struct")
+				log.Panic(encoder.ErrInvalidOmitEmpty)
 			}
 
 			if len(tag) > 0 && tag[0] == '-' {
@@ -129,7 +129,7 @@ func populate(v reflect.Value, rand *mathrand.Rand, options PopulateRandomOption
 
 			fv := v.Field(i)
 			if fv.CanSet() && ff.Name != "_" {
-				maxlen := tagMaxLen(tag)
+				maxlen := encoder.TagMaxLen(tag)
 
 				opts := options
 				if omitempty && opts.ForceEmptyOmitEmpty {
@@ -203,30 +203,4 @@ func randString(rand *mathrand.Rand, n int) string {
 		b[i] = printableChars[rand.Int63()%int64(len(printableChars))]
 	}
 	return string(b)
-}
-
-// tagOmitempty returns true if the tag specifies omitempty
-func tagOmitempty(tag string) bool {
-	return strings.Contains(tag, ",omitempty")
-}
-
-// tagMaxLen returns the maxlen value tagged on a struct. Returns 0 if no tag is present.
-func tagMaxLen(tag string) int {
-	maxlenIndex := strings.Index(tag, ",maxlen=")
-	if maxlenIndex == -1 {
-		return 0
-	}
-
-	maxlenRem := tag[maxlenIndex+len(",maxlen="):]
-	commaIndex := strings.Index(maxlenRem, ",")
-	if commaIndex != -1 {
-		maxlenRem = maxlenRem[:commaIndex]
-	}
-
-	maxlen, err := strconv.Atoi(maxlenRem)
-	if err != nil {
-		panic("maxlen must be a number")
-	}
-
-	return maxlen
 }

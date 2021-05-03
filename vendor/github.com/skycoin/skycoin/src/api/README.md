@@ -18,7 +18,6 @@ The API has two versions, `/api/v1` and `/api/v2`.
 - [General system checks](#general-system-checks)
 	- [Health check](#health-check)
 	- [Version info](#version-info)
-	- [Prometheus metrics](#prometheus-metrics)
 - [Simple query APIs](#simple-query-apis)
 	- [Get balance of addresses](#get-balance-of-addresses)
 	- [Get unspent output set of address or hash](#get-unspent-output-set-of-address-or-hash)
@@ -32,6 +31,7 @@ The API has two versions, `/api/v1` and `/api/v2`.
 	- [Verify wallet Seed](#verify-wallet-seed)
 	- [Create wallet](#create-wallet)
 	- [Generate new address in wallet](#generate-new-address-in-wallet)
+    - [Scan addresses in wallet](#scan-addresses-in-wallet)
 	- [Change wallet label](#change-wallet-label)
 	- [Get wallet balance](#get-wallet-balance)
 	- [Create transaction](#create-transaction)
@@ -52,6 +52,7 @@ The API has two versions, `/api/v1` and `/api/v2`.
 	- [Get raw transaction by id](#get-raw-transaction-by-id)
 	- [Inject raw transaction](#inject-raw-transaction)
 	- [Get transactions for addresses](#get-transactions-for-addresses)
+    - [Get transactions with pagination](#get-transactions-with-pagination)
 	- [Resend unconfirmed transactions](#resend-unconfirmed-transactions)
 	- [Verify encoded transaction](#verify-encoded-transaction)
 - [Block APIs](#block-apis)
@@ -111,7 +112,7 @@ look like this:
 {
     "error": {
         "code": 400,
-        "message": "bad arguments",
+        "message": "bad arguments"
     }
 }
 ```
@@ -139,7 +140,6 @@ These API sets are:
 * `STATUS` - A subset of `READ`, these endpoints report the application, network or blockchain status
 * `TXN` - Enables `/api/v1/injectTransaction` and `/api/v1/resendUnconfirmedTxns` without enabling wallet endpoints
 * `WALLET` - These endpoints operate on local wallet files
-* `PROMETHEUS` - This is the `/api/v2/metrics` method exposing in Prometheus text format the default metrics for Skycoin node application
 * `NET_CTRL` - The `/api/v1/network/connection/disconnect` method, intended for network administration endpoints
 * `INSECURE_WALLET_SEED` - This is the `/api/v1/wallet/seed` endpoint, used to decrypt and return the seed from an encrypted wallet. It is only intended for use by the desktop client.
 * `STORAGE` - This is the `/api/v2/data` endpoint, used to interact with the key-value storage.
@@ -284,124 +284,6 @@ Result:
 }
 ```
 
-### Prometheus metrics
-
-API sets: `PROMETHEUS`
-
-```
-URI: /api/v2/metrics
-Method: GET
-```
-
-Example:
-
-```sh
-curl http://127.0.0.1:6420/api/v2/metrics
-```
-
-Result:
-
-```
-# HELP go_gc_duration_seconds A summary of the GC invocation durations.
-# TYPE go_gc_duration_seconds summary
-go_gc_duration_seconds{quantile="0"} 5.31e-05
-go_gc_duration_seconds{quantile="0.25"} 0.000158
-go_gc_duration_seconds{quantile="0.5"} 0.0001789
-go_gc_duration_seconds{quantile="0.75"} 0.0002216
-go_gc_duration_seconds{quantile="1"} 0.0005878
-go_gc_duration_seconds_sum 0.3881053
-go_gc_duration_seconds_count 1959
-# HELP go_goroutines Number of goroutines that currently exist.
-# TYPE go_goroutines gauge
-go_goroutines 30
-# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
-# TYPE go_memstats_alloc_bytes gauge
-go_memstats_alloc_bytes 2.862168e+06
-# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
-# TYPE go_memstats_alloc_bytes_total counter
-go_memstats_alloc_bytes_total 4.462792584e+09
-# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.
-# TYPE go_memstats_buck_hash_sys_bytes gauge
-go_memstats_buck_hash_sys_bytes 1.794588e+06
-# HELP go_memstats_frees_total Total number of frees.
-# TYPE go_memstats_frees_total counter
-go_memstats_frees_total 4.7917586e+07
-# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.
-# TYPE go_memstats_gc_sys_bytes gauge
-go_memstats_gc_sys_bytes 2.392064e+06
-# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.
-# TYPE go_memstats_heap_alloc_bytes gauge
-go_memstats_heap_alloc_bytes 2.862168e+06
-# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.
-# TYPE go_memstats_heap_idle_bytes gauge
-go_memstats_heap_idle_bytes 6.0973056e+07
-# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.
-# TYPE go_memstats_heap_inuse_bytes gauge
-go_memstats_heap_inuse_bytes 5.087232e+06
-# HELP go_memstats_heap_objects Number of allocated objects.
-# TYPE go_memstats_heap_objects gauge
-go_memstats_heap_objects 16326
-# HELP go_memstats_heap_released_bytes_total Total number of heap bytes released to OS.
-# TYPE go_memstats_heap_released_bytes_total counter
-go_memstats_heap_released_bytes_total 0
-# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.
-# TYPE go_memstats_heap_sys_bytes gauge
-go_memstats_heap_sys_bytes 6.6060288e+07
-# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
-# TYPE go_memstats_last_gc_time_seconds gauge
-go_memstats_last_gc_time_seconds 1.5366276699863462e+09
-# HELP go_memstats_lookups_total Total number of pointer lookups.
-# TYPE go_memstats_lookups_total counter
-go_memstats_lookups_total 0
-# HELP go_memstats_mallocs_total Total number of mallocs.
-# TYPE go_memstats_mallocs_total counter
-go_memstats_mallocs_total 4.7933912e+07
-# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.
-# TYPE go_memstats_mcache_inuse_bytes gauge
-go_memstats_mcache_inuse_bytes 6912
-# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.
-# TYPE go_memstats_mcache_sys_bytes gauge
-go_memstats_mcache_sys_bytes 16384
-# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.
-# TYPE go_memstats_mspan_inuse_bytes gauge
-go_memstats_mspan_inuse_bytes 76000
-# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.
-# TYPE go_memstats_mspan_sys_bytes gauge
-go_memstats_mspan_sys_bytes 180224
-# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.
-# TYPE go_memstats_next_gc_bytes gauge
-go_memstats_next_gc_bytes 5.576912e+06
-# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.
-# TYPE go_memstats_other_sys_bytes gauge
-go_memstats_other_sys_bytes 792284
-# HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.
-# TYPE go_memstats_stack_inuse_bytes gauge
-go_memstats_stack_inuse_bytes 1.048576e+06
-# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.
-# TYPE go_memstats_stack_sys_bytes gauge
-go_memstats_stack_sys_bytes 1.048576e+06
-# HELP go_memstats_sys_bytes Number of bytes obtained by system. Sum of all system allocations.
-# TYPE go_memstats_sys_bytes gauge
-go_memstats_sys_bytes 7.2284408e+07
-# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
-# TYPE process_cpu_seconds_total counter
-process_cpu_seconds_total 36.04
-# HELP process_max_fds Maximum number of open file descriptors.
-# TYPE process_max_fds gauge
-process_max_fds 1.048576e+06
-# HELP process_open_fds Number of open file descriptors.
-# TYPE process_open_fds gauge
-process_open_fds 15
-# HELP process_resident_memory_bytes Resident memory size in bytes.
-# TYPE process_resident_memory_bytes gauge
-process_resident_memory_bytes 4.9025024e+07
-# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
-# TYPE process_start_time_seconds gauge
-process_start_time_seconds 1.53662761869e+09
-# HELP process_virtual_memory_bytes Virtual memory size in bytes.
-# TYPE process_virtual_memory_bytes gauge
-process_virtual_memory_bytes 8.22317056e+08
-```
 
 
 ## Simple query APIs
@@ -531,7 +413,7 @@ Result:
             "coins": "2.000000",
             "hours": 633,
             "calculated_hours": 10023
-        },
+        }
     ],
     "outgoing_outputs": [],
     "incoming_outputs": []
@@ -569,7 +451,7 @@ Result:
 ```json
 {
     "data": {
-        "version": 0,
+        "version": 0
     }
 }
 ```
@@ -658,7 +540,7 @@ Result:
         "crypto_type": "",
         "timestamp": 1511640884,
         "encrypted": false,
-        "bip44_coin": 8000,
+        "bip44_coin": 8000
     },
     "entries": [
         {
@@ -1035,7 +917,7 @@ Result:
         "crypto_type": "scrypt-chacha20poly1305",
         "timestamp": 1511640884,
         "encrypted": true,
-        "bip44_coin": 8000,
+        "bip44_coin": 8000
     },
     "entries": [
         {
@@ -1107,6 +989,42 @@ curl -X POST http://127.0.0.1:6420/api/v1/wallet/newAddress \
  -d 'id=2017_05_09_d554.wlt' \
  -d 'num=2' \
  -d 'password=$password'
+```
+
+Result:
+
+```json
+{
+    "addresses": [
+        "TDdQmMgbEVTwLe8EAiH2AoRc4SjoEFKrHB"
+    ]
+}
+```
+
+### Scan addresses in wallet
+
+API sets: `WALLET`
+
+This API would scan wallet addresses ahead to search for addresses that currently have unspent outputs (coins) associated with them.
+
+```
+URI: /api/v1/wallet/scan
+Method: POST
+Args:
+    id: wallet file name
+    num: the number you want to scan ahaed [optional(default to 20), must be > 0 if provided]
+    password: wallet password
+```
+
+The return value is a list of `new` generated addresses after scanning.
+
+Example:
+
+```sh
+curl -X POST http://127.0.0.1:6420/api/v1/wallet/scan \
+-F id=test.wlt \
+-F num=10 \
+-F password="${password}"
 ```
 
 Result:
@@ -1835,7 +1753,7 @@ Result:
 {
     "data": {
         "key1": "value",
-        "key2": "{\"key\":\"value\"}",
+        "key2": "{\"key\":\"value\"}"
     }
 }
 ```
@@ -2752,6 +2670,130 @@ Result:
 ]
 ```
 
+### Get transactions with pagination
+
+```
+URI: /api/v2/transactions
+Method: GET
+Args:
+    addrs: Comma separated addresses [optional, returns all transactions if no address is provided]
+    confirmed: Whether the transactions should be confirmed [optional, must be 0 or 1; if not provided, returns all]
+    verbose: [bool] include verbose transaction input data
+    page: Page number [optional, default to 1, must be greater than 0]
+    limit: The transactions number per page [optional, default to 10, maximum to 100]
+    sort: Sort the transactions by block seq [optional, default to asc, must be 'asc' or 'desc']
+``` 
+
+This API is almost the same as the `v1` version, except that it would not return all transactions by default and has
+pagination supported. If there are unconfirmed transactions, they will be appended after the confirmed transactions.
+
+If no argument is provided, the first 10 transactions will be returned. The response would have a `page_info` field which
+includes `total pages`, `page size`, and `current page`.
+
+Example:
+
+```sh
+curl http://127.0.0.1:6420/api/v2/transaction?page=1024&limit=2
+```
+
+<details>
+  <summary>View Output</summary>
+
+```json
+{
+    "data": {
+        "page_info": {
+            "total_pages": 66530,
+            "page_size": 2,
+            "current_page": 1024
+        },
+        "txns": [
+            {
+                "status": {
+                    "confirmed": true,
+                    "unconfirmed": false,
+                    "height": 128216,
+                    "block_seq": 2016
+                },
+                "time": 1500130512,
+                "txn": {
+                    "timestamp": 1500130512,
+                    "length": 414,
+                    "type": 0,
+                    "txid": "f0a3c01325f3e8f09255d49b490c804b929d668fcb70ea814e1a9868b608cfdb",
+                    "inner_hash": "85a298977f5fa338b7a73359c51b83787130b4f3db4a8425a1c54e45e317499d",
+                    "sigs": [
+                        "25333b9a283691cb189e1d2ade7dd6eeb6a275be820ff031af9b877b56330f1546a875a528bab2e559236141a644f2248a19ee5fcc86b2271f9dc60fb296f3f701",
+                        "e21fdae15af052f9b842bc062ab8a2ed42baf61fe11c60255555c0fc86b99abc659269dd907472091d392d31b3c1ad24e11176ee6a9e27da1fc57e2d8ddbd04d00",
+                        "5e4aa1cfca62e0a0aac1c646c3917a96bb6d1c7b8cde2e255d01730eb9d436b446cd5a09dfec097d28f5e7038a05e7172e7d5ddfe4558b1f9e3c25367051ff4f00"
+                    ],
+                    "inputs": [
+                        "5d83e6df94ca78079c8689e700dcabdab2de959fe9f803b36fec34b47b07d025",
+                        "ba1ba491090065d943ce3990b62c5d94f363bbdf37043032d79046af3687ef4c",
+                        "cdce197632464ee9c46d48cb21c959772b8bf2aa04239399353988b937b6e149"
+                    ],
+                    "outputs": [
+                        {
+                            "uxid": "d19549c470bb6d217bb8095df9ef14346ee8f86730208a4247420307fadbb0f0",
+                            "dst": "WSJoAtC4XcjAxTHAFLKU6MNthhpSDX7i1z",
+                            "coins": "3908.000000",
+                            "hours": 1070530
+                        },
+                        {
+                            "uxid": "1742af80ec06a3ef2123a371c6f5e82c275d881e7444f8a921818bc98032fff4",
+                            "dst": "2f9JhZJ147v9D4KxnJwbj8i5iNxqeKL3xNh",
+                            "coins": "50.000000",
+                            "hours": 1070530
+                        }
+                    ]
+                }
+            },
+            {
+                "status": {
+                    "confirmed": true,
+                    "unconfirmed": false,
+                    "height": 128215,
+                    "block_seq": 2017
+                },
+                "time": 1500130612,
+                "txn": {
+                    "timestamp": 1500130612,
+                    "length": 414,
+                    "type": 0,
+                    "txid": "7dc9ae6524abe9108fdc744f210b94274a9c9fdd3da16eaea1aa88037792c27d",
+                    "inner_hash": "752142fcd1cc4b9bad972611a9e64108d91b7642e1eb6b65ac92360a0c9c6bfc",
+                    "sigs": [
+                        "07973d43d4782ee96af70fa0ee4c73f667b035ade8770d55524b91e6d762a73b7bb6e24358c929609dd91c0140e51fa4f55952b45638bae699e522f4009c8f0c01",
+                        "6d8cd2ebabcb511b1772546c898fa456bfeffefcba69aea0f6c285cda38014c015bb664f66ce0d840c71f66403782e5b6b9fd2688a212eb2e3d275aebee5856b00",
+                        "4844a246eff8b59f177f9a4a43815b1fa8a3168c18d63b50c75773ee51c0b9c047ce59431871ba9fdb7df8827c9a2b175424f22cc6cf02a784b805b50574cc7000"
+                    ],
+                    "inputs": [
+                        "8754b0d917f6690d5e88dd0950bdcb8e09d96ffb14b76964da923f5dc8969e0c",
+                        "8fe7df28494563a5b47abbe737c095da461235a2529dda2a1119a19965293c8b",
+                        "421ec170519fab890e3410af5ba4cf33f71fa57d786d5d39f71b7a96ed898094"
+                    ],
+                    "outputs": [
+                        {
+                            "uxid": "fceb40fd9e8895c050fc165d861ebcbe87789eeb89809879a662fdac854bf84e",
+                            "dst": "2bfYafFtdkCRNcCyuDvsATV66GvBR9xfvjy",
+                            "coins": "37659.000000",
+                            "hours": 93972
+                        },
+                        {
+                            "uxid": "eb8c8677da0200be7a405f2e3497db9beaa6288734d85acc5488d573ce2b8399",
+                            "dst": "fXZv5X2NXhWYShoE8jazbh5UWYVCFgUXdW",
+                            "coins": "25000.000000",
+                            "hours": 187945
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
+```
+</details>
+
 ### Resend unconfirmed transactions
 
 API sets: `TXN`, `WALLET`
@@ -3039,7 +3081,7 @@ Result:
         {
             "address": "63.142.253.76:6000",
             "height": 2760
-        },
+        }
     ]
 }
 ```
@@ -4388,7 +4430,7 @@ To replicate the same behavior as `/api/v1/spend`, use the following request bod
     "hours_selection": {
         "type": "auto",
         "mode": "share",
-        "share_factor": "0.5",
+        "share_factor": "0.5"
     },
     "wallet": {
         "id": "$wallet_id",
