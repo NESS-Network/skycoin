@@ -411,7 +411,7 @@ func newServerMux(c muxConfig, gateway Gatewayer) *http.ServeMux {
 			handler = ContentTypeJSONRequired(handler)
 		}
 
-		handler = basicAuth(apiVersion, c.username, c.password, "skycoin daemon", handler)
+		handler = basicAuth(apiVersion, c.username, c.password, "privateness daemon", handler)
 		handler = gziphandler.New(handler)
 		mux.Handle(endpoint, handler)
 	}

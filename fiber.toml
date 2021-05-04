@@ -35,7 +35,7 @@ coin_hours_ticker = "HNESS"
 qr_uri_prefix = "privateness"
 explorer_url = "https://explorer.privateness.network"
 version = "https://nodes.privateness.network/blockchain/version.txt"
-#bip44_coin = 8000
+bip44_coin = 8000
 
 [params]
 max_coin_supply = 2e8
@@ -44,7 +44,7 @@ unlock_address_rate = 5
 # unlock_time_interval = 60 * 60 * 24 * 365
 # user_max_decimals = 3
 # user_max_transaction_size = 32 * 1024
-user_burn_factor = 2
+user_burn_factor = 4
 distribution_addresses = [
 "2BmHcwsZGfsBujFMzu56dU7gX6PGeZcLY33",
 "CCBkWFPekxmxUGLy81UMkNWBKam2kD2rra",

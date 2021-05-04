@@ -82,7 +82,7 @@ var testQuick = flag.Bool("test-quick", false, "run a quick integration test")
 func nodeAddress() string {
 	addr := os.Getenv("SKYCOIN_NODE_HOST")
 	if addr == "" {
-		return "http://127.0.0.1:6420"
+		return "http://127.0.0.1:6460"
 	}
 	return addr
 }
