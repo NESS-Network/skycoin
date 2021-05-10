@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 
 # Runs Privateness in desktop client configuration
-<<<<<<< HEAD
 
-=======
 COIN=privateness
 DATA_DIR=/root/.privateness
 RPC_ADDR=http://127.0.0.1:6460
->>>>>>> bb3936e67... xx
 set -x
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
