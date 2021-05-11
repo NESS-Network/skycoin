@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.27.1] - 2020-11-22
 
+### changed
+
+- Change `POST /api/v1/wallet/encrypt` to encrypt wallet that has no 'cryptoType' field with the default 
+  crypto type for `deterministic`, `collection`, `bip44` wallets.
+
 ### Fixed
 
 - #2540 Desktop wallet v0.27.0 failed to load the price.
