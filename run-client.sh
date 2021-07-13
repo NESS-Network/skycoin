@@ -3,7 +3,7 @@
 # Runs Privateness in desktop client configuration
 export COIN=privateness
 export DATA_DIR=/root/.privateness
-export RPC_ADDR=http://127.0.0.1:6420
+export RPC_ADDR=http://127.0.0.1:6460
 set -x
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
