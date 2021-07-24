@@ -66,10 +66,10 @@ LABEL "org.label-schema.name"="Ness" \
       "org.label-schema.vcs-ref"=$SCOMMIT \
       "org.label-schema.version"=$STAG \
       "org.label-schema.usage"="https://github.com/ness-network/privateness/blob/"$SCOMMIT"/docker/images/mainnet/README.md" \
-      "org.label-schema.docker.cmd"="docker volume create ness-data; docker volume create ness-wallet; docker run -d -v ness-data:/data/.privateness -v ness-wallet:/wallet -p 6660:6660 -p 6420:6420 --name ness-node-stable ness-network/privateness"
+      "org.label-schema.docker.cmd"="docker volume create ness-data; docker volume create ness-wallet; docker run -d -v ness-data:/data/.privateness -v ness-wallet:/wallet -p 6660:6660 -p 6460:6460 --name ness-node-stable ness-network/privateness"
 
 ENV COIN="privateness"
-ENV RPC_ADDR="http://0.0.0.0:6420" \
+ENV RPC_ADDR="http://0.0.0.0:6460" \
     DATA_DIR="/data/.$COIN" \
     WALLET_DIR="/wallet" \
     WALLET_NAME="$COIN_cli.wlt"
@@ -81,6 +81,6 @@ COPY --from=build /tmp/files /
 VOLUME $WALLET_DIR
 VOLUME $DATA_DIR
 
-EXPOSE 6660 6420
+EXPOSE 6660 6460
 
-ENTRYPOINT ["docker_launcher.sh", "--web-interface-addr=0.0.0.0", "--gui-dir=/usr/local/skycoin/src/gui/static"]
+ENTRYPOINT ["docker_launcher.sh", "--web-interface-addr=0.0.0.0", "--gui-dir=/usr/local/privateness/src/gui/static"]
