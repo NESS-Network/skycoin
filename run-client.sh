@@ -17,11 +17,12 @@ GOLDFLAGS="${GOLDFLAGS} -X main.Commit=${COMMIT} -X main.Branch=${BRANCH}"
 GORUNFLAGS=${GORUNFLAGS:-}
 go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS cmd/privateness/privateness.go \
     -gui-dir="${DIR}/src/gui/static/" \
-    -max-default-peer-outgoing-connections=7 \
+    -max-default-peer-outgoing-connections=1 \
     -launch-browser=true \
     -enable-all-api-sets=true \
     -enable-gui=true \
     -log-level=info \
+    -disable-pex=false \
     $@
 
 popd >/dev/null
