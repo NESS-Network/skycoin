@@ -19,7 +19,7 @@ go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS cmd/privateness/privateness.go \
     -launch-browser=false \
     -enable-all-api-sets=true \
     -enable-gui=false \
-    -log-level=info \
+    -log-level=error \
     -disable-pex=false \
     $@
 
