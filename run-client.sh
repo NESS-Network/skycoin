@@ -4,6 +4,7 @@
 export COIN=privateness
 export DATA_DIR=/root/.privateness
 export RPC_ADDR=http://127.0.0.1:6460
+rm $DATA_DIR/peers.*
 set -x
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
