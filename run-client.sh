@@ -24,7 +24,7 @@ go run -ldflags "${GOLDFLAGS}" $GORUNFLAGS cmd/privateness/privateness.go \
     -enable-gui=true \
     -log-level=info \
     -disable-pex=false \
-    -connection-rate=30 \
+    -connection-rate=9s \
     $@
 
 popd >/dev/null
